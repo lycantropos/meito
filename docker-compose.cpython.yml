@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  meito-cpython:
+    build:
+      context: .
+      args:
+        - IMAGE_NAME=${CPYTHON_IMAGE_NAME}
+        - IMAGE_VERSION=${CPYTHON_IMAGE_VERSION}
+    image: lycantropos/meito-cpython:0.0.0
+    volumes:
+      - ./meito/:/opt/meito/meito/
+      - ./tests/:/opt/meito/tests/
+      - ./README.md:/opt/meito/README.md
+      - ./requirements.txt:/opt/meito/requirements.txt
+      - ./requirements-tests.txt:/opt/meito/requirements-tests.txt
+      - ./setup.py:/opt/meito/setup.py
+      - ./pytest.ini:/opt/meito/pytest.ini
+    entrypoint: pytest
